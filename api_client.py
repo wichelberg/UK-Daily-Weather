@@ -22,11 +22,10 @@ def fetch_point_data(client, lat, lon, start, end, variables):
     response = responses[0]
     daily = response.Daily()
     
-    # DataFrame oluşturma mantığı
     return pd.DataFrame({
         "date": pd.date_range(
-            start=pd.to_datetime(daily.Time(), unit="s", utc=True),
-            end=pd.to_datetime(daily.TimeEnd(), unit="s", utc=True),
+            start=pd.to_datetime(daily.Time(), unit="s", utc=True).tz_convert("Europe/London"),
+            end=pd.to_datetime(daily.TimeEnd(), unit="s", utc=True).tz_convert("Europe/London"),
             freq=pd.Timedelta(seconds=daily.Interval()),
             inclusive="left"
         ).date,

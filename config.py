@@ -27,5 +27,5 @@ DAILY_VARS = [
 ]
 
 START_DATE = "2010-01-01"
-END_DATE = "2020-12-31"
+END_DATE = "2021-01-01"
 OUTPUT_FILE = "output/uk_weather_daily_2010_2020.csv"
