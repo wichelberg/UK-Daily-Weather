@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-# Terminalin nerede olduğuna bakmaksızın dosya yolunu sabitler
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 def weather_audit():
@@ -10,11 +9,9 @@ def weather_audit():
     print("="*50)
 
     try:
-        # Dosya yolunu kontrol et
         path = '../uk_weather_daily_2010_2020.csv' if os.path.exists('../uk_weather_daily_2010_2020.csv') else 'uk_weather_daily_2010_2020.csv'
         df = pd.read_csv(path)
         
-        # 1. Korelasyon Hesaplama (Raporun kalbi)
         correlation = df['temperature_mean'].corr(df['temperature_min'])
         
         print(f"\n[CORRELATION PROOF]")
@@ -23,7 +20,6 @@ def weather_audit():
         if correlation > 0.90:
             print("Verdict: High Multicollinearity detected. Pruning is justified.")
         
-        # 2. Gereksiz sütunların tespiti
         print("\n[FEATURE SUMMARY]")
         pruning_candidates = ['evapotranspiration', 'solar_radiation', 'windspeed_mean']
         for col in pruning_candidates:
